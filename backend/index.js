@@ -20,7 +20,7 @@ connectDB();
 const app = express();
 app.use(
   cors({
-    origin: "https://wt-medical-1.onrender.com/",
+    origin: "https://wt-medical-1.onrender.com",
     methods: ["GET", "PUT", "POST", "DELETE"],
     allowedHeaders: ["Content-Type"],
     credentials: true,
@@ -36,6 +36,10 @@ app.use("/api/products", productRoutes);
 app.use("/api/upload", uploadRoutes);
 app.use("/api/orders", orderRoutes);
 app.use((req, res, next) => {
+  res.setHeader(
+    "Access-Control-Allow-Origin",
+    "https://wt-medical-1.onrender.com"
+  );
   res.setHeader("Access-Control-Allow-Credentials", "true");
   next();
 });
@@ -45,6 +49,7 @@ app.get("/api/config/paypal", (req, res) => {
 });
 
 app.get("/", (req, res) => {
+  res.set("Access-Control-Allow-Origin", "https://wt-medical-1.onrender.com");
   res.set("Access-Control-Allow-Credentials", "true");
   res.send("hello to the backend ");
 });
