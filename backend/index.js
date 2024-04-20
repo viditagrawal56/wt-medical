@@ -20,8 +20,9 @@ connectDB();
 const app = express();
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: "https://wt-medical-1.onrender.com/",
     methods: ["GET", "PUT", "POST", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,
   })
 );
