@@ -1,6 +1,6 @@
 import express from "express";
 import {
-    createUser,
+  createUser,
   loginUser,
   logoutCurrentUser,
   getAllUsers,
@@ -9,17 +9,14 @@ import {
   deleteUserById,
   getUserById,
   updateUserById,
-
-
-    
-
-  } from "../controllers/userController.js";
+} from "../controllers/userController.js";
 import { authenticate, authorizeAdmin } from "../middlewares/authMiddleware.js";
 
-const router = express.Router()
-router.route('/').post(createUser)
-.get(authenticate, authorizeAdmin, getAllUsers);
-;
+const router = express.Router();
+router
+  .route("/")
+  .post(createUser)
+  .get(authenticate, authorizeAdmin, getAllUsers);
 router.post("/auth", loginUser);
 router.post("/logout", logoutCurrentUser);
 router
@@ -27,7 +24,7 @@ router
   .get(authenticate, getCurrentUserProfile)
   .put(authenticate, updateCurrentUserProfile);
 
-  router
+router
   .route("/:id")
   .delete(authenticate, authorizeAdmin, deleteUserById)
   .get(authenticate, authorizeAdmin, getUserById)

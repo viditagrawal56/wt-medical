@@ -11,6 +11,7 @@ import uploadRoutes from "./routes/uploadRoutes.js";
 import orderRoutes from "./routes/orderRoutes.js";
 import { initializeApp } from "firebase/app";
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
+import accessHandler from "./middlewares/accessHandler.js";
 
 dotenv.config();
 const port = process.env.PORT || 5000;
@@ -29,6 +30,7 @@ app.use(
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
+app.use(accessHandler());
 
 app.use("/api/users", userRoutes);
 app.use("/api/category", categoryRoutes);
